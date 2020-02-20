@@ -1,0 +1,75 @@
+.game-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.backLink{
+    align-content: center;
+    justify-content: center;
+}
+.back{
+    padding: 10px;
+    border: 1px solid lightgray;
+    background-color: white;
+    color: black;
+}
+.teams{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.team-line{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid lightgray;
+    text-decoration: none;
+    width: 600px;
+    background-color: white;
+    transition: 0.3s;
+    padding: 8px 20px 8px 20px;
+    margin: 10px;
+}
+.team-line h1{
+    font-size: 40pt;
+}
+.team-line-group{
+    display: flex;
+    flex-direction: row;
+    font-size: 16pt;
+}
+.team-line img {
+    width: 150px;
+}
+.game-time{
+    border: 1px solid lightgray;
+    background-color: white;
+    margin: 10px;
+}
+.game-time h3{
+    margin: 10px;
+}
+h3{
+    margin: 20px 0 0 0;
+}
+.last-play{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    background-color: white;
+    margin: 10px
+}
+.last-play img{
+    width: 100px;
+    border: 1px solid lightgray;
+    border-radius: 50px;
+    margin: 5px;
+}

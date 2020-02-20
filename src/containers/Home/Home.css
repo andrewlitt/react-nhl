@@ -1,0 +1,14 @@
+
+.home{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-list{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-self: center;
+    flex-wrap: wrap;
+
+}

@@ -1,0 +1,99 @@
+.chart-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.chart{
+    background-size: cover;
+    background-image: url('../../static/img/rink2.png');
+}
+
+.tooltip{
+    background-color: white;
+    width: 350px;
+    border: 1px solid lightgray;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.tooltip img{ 
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border: 1px solid lightgray;
+    margin-right: 10px;
+}
+.legend{
+    background-color: white;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px 10px;
+}
+.legend button{
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    background-color: white;
+    padding: 10px;
+    transition: 0.3s;
+    font-weight: 700;
+}
+.legend button:hover{
+    background-color: #ededed;
+}
+.legend p{
+    display: inline;
+}
+.strike p{
+    text-decoration: line-through;
+}
+.goals{
+    color: red;
+    font-weight: 700;
+}
+.shots{
+    color: blue;
+
+}
+.missed{
+    color: black;
+}
+.blocked{
+    color: purple
+}
+.hits{
+    color: green;
+    font-weight: 700;
+
+}
+#triangle{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 14px solid grey;
+    margin-right: 5px;
+
+}
+#bar{
+    display: inline-block;
+    height: 14px;
+    width: 5px;
+    background-color: red;
+    margin-right: 5px;
+}
+#circle{
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: grey;
+    border-radius: 50%;
+    margin-right: 5px;
+
+}
