@@ -3,19 +3,7 @@ import './Game.css'
 import RinkChart from '../../components/RinkChart/RinkChart';
 import {LOGO_URL, PLAYER_URL} from '../../constants';
 import { Link } from 'react-router-dom';
-const CustomTooltip = ({ active, payload, label }) => {
-    console.log(payload[0]);
-    if (payload[1]) {
-      return (
-        <div className="tooltip">
-          <img src={PLAYER_URL+payload[1].payload.playerID+'.jpg'} />
-          <p className="label">{payload[1].payload.name}</p>
-        </div>
-      );
-    }
-  
-    return null;
-  };
+import ReactDataGrid from 'react-data-grid';
 
 class Game extends React.Component {
     
@@ -32,6 +20,16 @@ class Game extends React.Component {
         }
     }
     componentDidMount(){
+        this.getData();
+        this.timer = setInterval(()=> this.getData(), 15000);
+    }
+
+    componentWillUnmount(){
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    getData(){
         fetch(`http://localhost:8000/game/${this.state.id}`)
         .then(res => res.json())
         .then(
@@ -48,7 +46,6 @@ class Game extends React.Component {
             }
         )
     }
-
     getCoords(teamID, playType, plays){
         const validPlays = plays.filter(play => {
             if(play.coordinates.x && play.team.id == teamID && play.result.eventTypeId === playType){
@@ -66,40 +63,54 @@ class Game extends React.Component {
     render(){
             let currentPlay = this.state.plays.currentPlay;
             if(this.state.isLoaded){
-                return(
-                    <div className="game-container">
-                        <Link className ="link backLink" to={'/'}>
-                            <p className="back">Home</p>
-                        </Link>
-                        <div className="game-time"><h3>{this.state.linescore.currentPeriodOrdinal} - {this.state.linescore.currentPeriodTimeRemaining}</h3></div>
-                        <div className='teams'>
-                            <div className='team-line'>
-                                <div className='team-line-group'>
-                                    <img src= {`${LOGO_URL}${this.state.away.id}.svg`}/>
-                                    <h2>{this.state.away.teamName}</h2>
+                if(this.state.linescore.currentPeriod > 0)
+                    return(
+                        <div className="game-container">
+                            <div className="game-time"><h3>{this.state.linescore.currentPeriodOrdinal} - {this.state.linescore.currentPeriodTimeRemaining}</h3></div>
+                            <div className='teams'>
+                                <div className='team-line'>
+                                    <div className='team-line-group'>
+                                        <img src= {`${LOGO_URL}${this.state.away.id}.svg`}/>
+                                        <h2>{this.state.away.teamName}</h2>
+                                    </div>
+                                    <h1>{this.state.linescore.teams.away.goals}</h1>
                                 </div>
-                                <h1>{this.state.linescore.teams.away.goals}</h1>
+                                <div className='team-line'>
+                                    <div className='team-line-group'>
+                                        <img src={`${LOGO_URL}${this.state.home.id}.svg`}/>
+                                        <h2>{this.state.home.teamName}</h2>
+                                    </div>
+                                    <h1>{this.state.linescore.teams.home.goals}</h1>
+                                </div>    
                             </div>
-                            <div className='team-line'>
-                                <div className='team-line-group'>
-                                    <img src={`${LOGO_URL}${this.state.home.id}.svg`}/>
-                                    <h2>{this.state.home.teamName}</h2>
-                                </div>
-                                <h1>{this.state.linescore.teams.home.goals}</h1>
-                            </div>    
+                            <h3 className="">Last Play</h3>  
+                            <div className="last-play">
+                                {currentPlay.players && <img src={PLAYER_URL+currentPlay.players[0].player.id+'.jpg'}/> } 
+                                <p>{currentPlay.result.description} ({currentPlay.about.periodTime} {currentPlay.about.ordinalNum})</p>
+                            </div>
+                            <RinkChart plays={this.state.plays.allPlays} away={this.state.away} home={this.state.home} homeStart = {this.state.linescore.periods[0].home.rinkSide}/>
+                            <Link className ="link backLink" to={'/'}>
+                                <p className="back">Home</p>
+                            </Link>
                         </div>
-                        <h3 className="">Last Play</h3>  
-                        <div className="last-play">
-                            {currentPlay.players && <img src={PLAYER_URL+currentPlay.players[0].player.id+'.jpg'}/> } 
-                            <p>{currentPlay.result.description} ({currentPlay.about.periodTime} {currentPlay.about.ordinalNum})</p>
+                    )
+                else{
+                    return(
+                        <div className="not-started-container">
+                            <h1>This game hasn't started yet. Come back in a bit!</h1>
+                            <div className='not-started'>
+                                <img src= {`${LOGO_URL}${this.state.away.id}.svg`}/>
+                                <h1>at</h1>
+                                <img src= {`${LOGO_URL}${this.state.home.id}.svg`}/>
+                            </div>
+                            <Link className ="link backLink" to={'/'}>
+                                <p className="back">Home</p>
+                            </Link>
                         </div>
-
-                        <RinkChart plays={this.state.plays.allPlays} away={this.state.away} home={this.state.home} homeStart = {this.state.linescore.periods[0].home.rinkSide}/>
-                    </div>
-                )
+                    )
+                }
             }
             return(<h1>Loading...</h1>);
-           
         }
     }
 

@@ -4,6 +4,9 @@
     align-items: center;
     width: 100%;
 }
+.game-container h3{
+    margin: 10px 0 0 0;
+}
 .backLink{
     align-content: center;
     justify-content: center;
@@ -29,14 +32,17 @@
     align-items: center;
     border: 1px solid lightgray;
     text-decoration: none;
-    width: 600px;
+    width: 420px;
     background-color: white;
     transition: 0.3s;
-    padding: 8px 20px 8px 20px;
+    padding: 10px 20px 10px 20px;
     margin: 10px;
 }
+.team-line h2{
+    font-size: 20pt;
+}
 .team-line h1{
-    font-size: 40pt;
+    font-size: 25pt;
 }
 .team-line-group{
     display: flex;
@@ -44,18 +50,15 @@
     font-size: 16pt;
 }
 .team-line img {
-    width: 150px;
+    width: 100px;
 }
 .game-time{
     border: 1px solid lightgray;
     background-color: white;
-    margin: 10px;
+    margin-top: 10px;
 }
 .game-time h3{
     margin: 10px;
-}
-h3{
-    margin: 20px 0 0 0;
 }
 .last-play{
     display: flex;
@@ -65,11 +68,29 @@ h3{
     padding: 5px 10px;
     border: 1px solid lightgray;
     background-color: white;
-    margin: 10px
+    margin: 10px 0 20px 0;
 }
 .last-play img{
     width: 100px;
     border: 1px solid lightgray;
     border-radius: 50px;
     margin: 5px;
+}
+.not-started-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+.not-started{
+    display: flex;
+    flex: row;
+    align-items: center;
+    background-color: white;
+    border: 1px solid lightgray;
+    padding: 30px 15px;
+}
+.not-started img{
+    width: 250px;
 }

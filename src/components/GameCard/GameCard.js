@@ -2,6 +2,7 @@ import React from 'react';
 import './GameCard.css'
 import { LOGO_URL } from '../../constants';
 import { Link } from 'react-router-dom';
+
 const GameCard = ({ id, status, home, away }) => {
     return (
         <Link className ="link" to={'/game/'+ id}>

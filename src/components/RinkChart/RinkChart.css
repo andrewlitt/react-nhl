@@ -33,6 +33,7 @@
     align-items: center;
     flex-direction: column;
     padding: 5px 10px;
+    margin-bottom: 5px;
 }
 .legend button{
     border: none;
@@ -49,8 +50,13 @@
 .legend p{
     display: inline;
 }
+.strike{
+    
+}
 .strike p{
     text-decoration: line-through;
+    background-color: lightgrey;
+
 }
 .goals{
     color: red;
