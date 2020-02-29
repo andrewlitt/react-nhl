@@ -12,7 +12,12 @@ class Home extends React.Component {
     }
   }
   componentDidMount(){
-    fetch('http://localhost:8000/')
+    let API_URL = 'https://react-nhl-server.now.sh';
+    if(process.env.NODE_ENV == 'development'){
+      API_URL = 'http://localhost:8000'
+    };
+    console.log(API_URL)
+    fetch(API_URL)
       .then(res => res.json())
       .then(
         (result) => {

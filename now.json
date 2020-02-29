@@ -1,0 +1,7 @@
+{
+    "build": {
+        "env": {
+            "API_URL": "https://react-nhl-server.now.sh"
+        }
+    }
+}

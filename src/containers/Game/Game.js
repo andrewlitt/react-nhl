@@ -30,7 +30,11 @@ class Game extends React.Component {
     }
 
     getData(){
-        fetch(`http://localhost:8000/game/${this.state.id}`)
+        let API_URL = 'https://react-nhl-server.now.sh';
+        if(process.env.NODE_ENV =='development'){
+          API_URL = 'http://localhost:8000'
+        };
+        fetch(`${API_URL}/game/${this.state.id}`)
         .then(res => res.json())
         .then(
             (result) => {
