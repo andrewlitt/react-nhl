@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "NHL Game Viewer",
+  "name": "NHL Game Viewer. Built by Andrew Litt.",
   "icons": [
     {
       "src": "favicon.ico",
