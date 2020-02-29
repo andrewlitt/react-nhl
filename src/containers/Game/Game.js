@@ -1,9 +1,9 @@
 import React from 'react';
 import './Game.css'
 import RinkChart from '../../components/RinkChart/RinkChart';
+import PlayerTable from '../../components/PlayerTable/PlayerTable';
 import {LOGO_URL, PLAYER_URL} from '../../constants';
 import { Link } from 'react-router-dom';
-import ReactDataGrid from 'react-data-grid';
 
 class Game extends React.Component {
     
@@ -21,7 +21,7 @@ class Game extends React.Component {
     }
     componentDidMount(){
         this.getData();
-        this.timer = setInterval(()=> this.getData(), 15000);
+        this.timer = setInterval(()=> this.getData(), 30000);
     }
 
     componentWillUnmount(){
@@ -51,6 +51,7 @@ class Game extends React.Component {
             if(play.coordinates.x && play.team.id == teamID && play.result.eventTypeId === playType){
                 return play;
             }
+            return null;
         });
         const coords = validPlays.map(play => {
             var mult = ((play.about.period == 2) ? '-1' : '1');
@@ -61,47 +62,88 @@ class Game extends React.Component {
     }
     
     render(){
-            let currentPlay = this.state.plays.currentPlay;
-            if(this.state.isLoaded){
-                if(this.state.linescore.currentPeriod > 0)
+            const {isLoaded, home, away, linescore, plays} = this.state;
+
+            if(isLoaded){
+                if(linescore.currentPeriod > 0){
+                    const homePlayerData = home.players.filter(player => player.stats.skaterStats).map(player => {
+                        const info = {
+                            jerseyNumber: player.jerseyNumber,
+                            fullName: player.person.fullName,
+                            goals: player.stats.skaterStats.goals,
+                            shots: player.stats.skaterStats.shots,
+                            hits: player.stats.skaterStats.hits,
+                            timeOnIce: player.stats.skaterStats.timeOnIce
+                        };
+                        return info;
+                    });
+                    const awayPlayerData = away.players.filter(player => player.stats.skaterStats).map(player => {
+                        const info = {
+                            jerseyNumber: player.jerseyNumber,
+                            fullName: player.person.fullName,
+                            goals: player.stats.skaterStats.goals,
+                            shots: player.stats.skaterStats.shots,
+                            hits: player.stats.skaterStats.hits,
+                            timeOnIce: player.stats.skaterStats.timeOnIce
+                        };
+                        return info;
+                    });
+                    console.log(awayPlayerData)
+                    const columns = [{
+                        Header: 'Team',
+                        columns: [
+                            { accessor: 'jerseyNumber', Header: 'Jersey #'},
+                            { accessor: 'fullName', Header: 'Full Name'},
+                            { accessor: 'goals', Header: 'Goals'},
+                            { accessor: 'shots', Header: 'Shots'},
+                            { accessor: 'hits', Header: 'Hits'},
+                            { accessor: 'timeOnIce', Header: 'TOI'}
+                        ]
+                    }];
+
                     return(
                         <div className="game-container">
-                            <div className="game-time"><h3>{this.state.linescore.currentPeriodOrdinal} - {this.state.linescore.currentPeriodTimeRemaining}</h3></div>
+                            <div className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></div>
                             <div className='teams'>
                                 <div className='team-line'>
                                     <div className='team-line-group'>
-                                        <img src= {`${LOGO_URL}${this.state.away.id}.svg`}/>
-                                        <h2>{this.state.away.teamName}</h2>
+                                        <img src= {`${LOGO_URL}${away.id}.svg`}/>
+                                        <h2>{away.teamName}</h2>
                                     </div>
-                                    <h1>{this.state.linescore.teams.away.goals}</h1>
+                                    <h1>{linescore.teams.away.goals}</h1>
                                 </div>
                                 <div className='team-line'>
                                     <div className='team-line-group'>
-                                        <img src={`${LOGO_URL}${this.state.home.id}.svg`}/>
-                                        <h2>{this.state.home.teamName}</h2>
+                                        <img src={`${LOGO_URL}${home.id}.svg`}/>
+                                        <h2>{home.teamName}</h2>
                                     </div>
-                                    <h1>{this.state.linescore.teams.home.goals}</h1>
+                                    <h1>{linescore.teams.home.goals}</h1>
                                 </div>    
                             </div>
                             <h3 className="">Last Play</h3>  
                             <div className="last-play">
-                                {currentPlay.players && <img src={PLAYER_URL+currentPlay.players[0].player.id+'.jpg'}/> } 
-                                <p>{currentPlay.result.description} ({currentPlay.about.periodTime} {currentPlay.about.ordinalNum})</p>
+                                {plays.currentPlay.players && <img src={PLAYER_URL+plays.currentPlay.players[0].player.id+'.jpg'}/> } 
+                                <p>{plays.currentPlay.result.description} ({plays.currentPlay.about.periodTime} {plays.currentPlay.about.ordinalNum})</p>
                             </div>
-                            <RinkChart plays={this.state.plays.allPlays} away={this.state.away} home={this.state.home} homeStart = {this.state.linescore.periods[0].home.rinkSide}/>
-                            <Link className ="link backLink" to={'/'}>
+                            <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
+                            <div className='team-tables'>
+                                <PlayerTable columns={columns} data={awayPlayerData} />
+                                <PlayerTable columns={columns} data={homePlayerData} />
+                            </div>
+                            <Link className ="link back-link" to={'/'}>
                                 <p className="back">Home</p>
                             </Link>
                         </div>
-                    )
+                    );
+                }
                 else{
                     return(
                         <div className="not-started-container">
                             <h1>This game hasn't started yet. Come back in a bit!</h1>
                             <div className='not-started'>
-                                <img src= {`${LOGO_URL}${this.state.away.id}.svg`}/>
+                                <img src= {`${LOGO_URL}${away.id}.svg`}/>
                                 <h1>at</h1>
-                                <img src= {`${LOGO_URL}${this.state.home.id}.svg`}/>
+                                <img src= {`${LOGO_URL}${home.id}.svg`}/>
                             </div>
                             <Link className ="link backLink" to={'/'}>
                                 <p className="back">Home</p>

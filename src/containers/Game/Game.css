@@ -7,7 +7,7 @@
 .game-container h3{
     margin: 10px 0 0 0;
 }
-.backLink{
+.back-link{
     align-content: center;
     justify-content: center;
 }
@@ -93,4 +93,10 @@
 }
 .not-started img{
     width: 250px;
+}
+.team-tables{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }

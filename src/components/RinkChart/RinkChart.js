@@ -17,7 +17,7 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
         const coords = validPlays.map(play => {
             var mult = ((play.about.period == 2) ? '-1' : '1');
             if(homeStart =="left") mult = -1*mult;
-            return { name: play.result.description, playerID: play.players[0].player.id,x: mult*play.coordinates.x, y: mult*play.coordinates.y}
+            return { name: play.result.description, playerID: play.players[0].player.id, x: mult*play.coordinates.x, y: mult*play.coordinates.y}
         });
         return coords;
     }
@@ -43,18 +43,18 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
     const[hits, setHits]       = useState(true);
     
     return (
-        <div className="chart-container">
+        <div className="chart-container"> 
             <div className="legend">
                 <div>
-                    <button className={!showAway && 'strike'} onClick={ () => setAway(!showAway) }><div id="triangle"></div><p>{away.teamName}</p></button>
-                    <button className={!showHome && 'strike'} onClick={ () => setHome(!showHome) }><div id="circle"></div><p>{home.teamName}</p></button>
+                    <button className={!showAway ? 'strike' : ''} onClick={ () => setAway(!showAway) }><div id="triangle"></div><p>{away.teamName}</p></button>
+                    <button className={!showHome ? 'strike' : ''} onClick={ () => setHome(!showHome) }><div id="circle"></div><p>{home.teamName}</p></button>
                 </div>
                 <div>
-                    <button className={ !goals   && 'strike' } onClick={ () => setGoals(!goals)     }><p className='goals'>Goals</p></button>
-                    <button className={ !shots   && 'strike' } onClick={ () => setShots(!shots)     }><p className='shots'>Shots</p></button>
-                    <button className={ !missed  && 'strike' } onClick={ () => setMissed(!missed)   }><p className='missed'>Missed Shots</p></button>
-                    <button className={ !blocked && 'strike' } onClick={ () => setBlocked(!blocked) }><p className='blocked'>Blocked Shots</p></button>
-                    <button className={ !hits    && 'strike' } onClick={ () => setHits(!hits)       }><p className='hits'>Hits</p></button>
+                    <button className={ !goals   ? 'strike' : ''} onClick={ () => setGoals(!goals)     }><p className='goals'>Goals</p></button>
+                    <button className={ !shots   ? 'strike' : ''} onClick={ () => setShots(!shots)     }><p className='shots'>Shots</p></button>
+                    <button className={ !missed  ? 'strike' : ''} onClick={ () => setMissed(!missed)   }><p className='missed'>Missed Shots</p></button>
+                    <button className={ !blocked ? 'strike' : ''} onClick={ () => setBlocked(!blocked) }><p className='blocked'>Blocked Shots</p></button>
+                    <button className={ !hits    ? 'strike' : ''} onClick={ () => setHits(!hits)       }><p className='hits'>Hits</p></button>
                 </div>
             </div>
             <ResponsiveContainer className="chart" width="80%" aspect={2.35}>
