@@ -1,6 +1,7 @@
 import React from 'react';
 import './Home.css'
 import GameCard from '../../components/GameCard/GameCard';
+import { API_URL, API_URL_DEV} from '../../constants';
 
 
 class Home extends React.Component {
@@ -12,12 +13,8 @@ class Home extends React.Component {
     }
   }
   componentDidMount(){
-    let API_URL = 'https://react-nhl-server.now.sh';
-    if(process.env.NODE_ENV == 'development'){
-      API_URL = 'http://localhost:8000'
-    };
-    console.log(API_URL)
-    fetch(API_URL)
+    const url = (process.env.NODE_ENV =='development') ? API_URL_DEV : API_URL;
+    fetch(url)
       .then(res => res.json())
       .then(
         (result) => {

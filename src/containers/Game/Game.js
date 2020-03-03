@@ -2,7 +2,8 @@ import React from 'react';
 import './Game.css'
 import RinkChart from '../../components/RinkChart/RinkChart';
 import PlayerTable from '../../components/PlayerTable/PlayerTable';
-import {LOGO_URL, PLAYER_URL} from '../../constants';
+import TeamBanner from '../../components/TeamBanner/TeamBanner';
+import {LOGO_URL, PLAYER_URL, API_URL, API_URL_DEV } from '../../constants';
 import { Link } from 'react-router-dom';
 
 class Game extends React.Component {
@@ -21,7 +22,7 @@ class Game extends React.Component {
     }
     componentDidMount(){
         this.getData();
-        this.timer = setInterval(()=> this.getData(), 30000);
+        this.timer = setInterval(()=> this.getData(), 20000);
     }
 
     componentWillUnmount(){
@@ -30,11 +31,8 @@ class Game extends React.Component {
     }
 
     getData(){
-        let API_URL = 'https://react-nhl-server.now.sh';
-        if(process.env.NODE_ENV =='development'){
-          API_URL = 'http://localhost:8000'
-        };
-        fetch(`${API_URL}/game/${this.state.id}`)
+        const url = (process.env.NODE_ENV =='development') ? API_URL_DEV : API_URL;
+        fetch(`${url}/game/${this.state.id}`)
         .then(res => res.json())
         .then(
             (result) => {
@@ -49,20 +47,6 @@ class Game extends React.Component {
             })
             }
         )
-    }
-    getCoords(teamID, playType, plays){
-        const validPlays = plays.filter(play => {
-            if(play.coordinates.x && play.team.id == teamID && play.result.eventTypeId === playType){
-                return play;
-            }
-            return null;
-        });
-        const coords = validPlays.map(play => {
-            var mult = ((play.about.period == 2) ? '-1' : '1');
-            if(this.state.linescore.periods[0].home.rinkSide =="left") mult = -1*mult;
-            return { name: play.result.description, playerID: play.players[0].player.id,x: mult*play.coordinates.x, y: mult*play.coordinates.y}
-        });
-        return coords;
     }
     
     render(){
@@ -92,7 +76,9 @@ class Game extends React.Component {
                         };
                         return info;
                     });
+
                     console.log(awayPlayerData)
+
                     const columns = [{
                         Header: 'Team',
                         columns: [
@@ -104,36 +90,23 @@ class Game extends React.Component {
                             { accessor: 'timeOnIce', Header: 'TOI'}
                         ]
                     }];
-
+                    
                     return(
                         <div className="game-container">
+                            <TeamBanner away={away} home={home}/>
+                            <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
+
                             <div className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></div>
-                            <div className='teams'>
-                                <div className='team-line'>
-                                    <div className='team-line-group'>
-                                        <img src= {`${LOGO_URL}${away.id}.svg`}/>
-                                        <h2>{away.teamName}</h2>
-                                    </div>
-                                    <h1>{linescore.teams.away.goals}</h1>
-                                </div>
-                                <div className='team-line'>
-                                    <div className='team-line-group'>
-                                        <img src={`${LOGO_URL}${home.id}.svg`}/>
-                                        <h2>{home.teamName}</h2>
-                                    </div>
-                                    <h1>{linescore.teams.home.goals}</h1>
-                                </div>    
+                            <div className='team-tables'>
+                                <PlayerTable columns={columns} data={awayPlayerData} />
+                                <PlayerTable columns={columns} data={homePlayerData} />
                             </div>
                             <h3 className="">Last Play</h3>  
                             <div className="last-play">
                                 {plays.currentPlay.players && <img src={PLAYER_URL+plays.currentPlay.players[0].player.id+'.jpg'}/> } 
                                 <p>{plays.currentPlay.result.description} ({plays.currentPlay.about.periodTime} {plays.currentPlay.about.ordinalNum})</p>
                             </div>
-                            <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
-                            <div className='team-tables'>
-                                <PlayerTable columns={columns} data={awayPlayerData} />
-                                <PlayerTable columns={columns} data={homePlayerData} />
-                            </div>
+
                             <Link className ="link back-link" to={'/'}>
                                 <p className="back">Home</p>
                             </Link>

@@ -4,12 +4,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 10px;
 }
 .chart{
     background-size: cover;
-    background-image: url('../../static/img/rink2.png');
+    background-image: url('../../static/img/rinkBW.png');
 }
-
 .tooltip{
     background-color: white;
     width: 350px;
@@ -50,8 +50,10 @@
 .legend p{
     display: inline;
 }
-.strike{
-    
+.legend img{
+    width: 10px;
+    max-height: 15px;
+    padding-right: 5px;
 }
 .strike p{
     text-decoration: line-through;
@@ -75,31 +77,5 @@
 .hits{
     color: green;
     font-weight: 700;
-
-}
-#triangle{
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: 14px solid grey;
-    margin-right: 5px;
-
-}
-#bar{
-    display: inline-block;
-    height: 14px;
-    width: 5px;
-    background-color: red;
-    margin-right: 5px;
-}
-#circle{
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    background: grey;
-    border-radius: 50%;
-    margin-right: 5px;
 
 }

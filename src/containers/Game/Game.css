@@ -25,33 +25,7 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-.team-line{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid lightgray;
-    text-decoration: none;
-    width: 420px;
-    background-color: white;
-    transition: 0.3s;
-    padding: 10px 20px 10px 20px;
-    margin: 10px;
-}
-.team-line h2{
-    font-size: 20pt;
-}
-.team-line h1{
-    font-size: 25pt;
-}
-.team-line-group{
-    display: flex;
-    flex-direction: row;
-    font-size: 16pt;
-}
-.team-line img {
-    width: 100px;
-}
+
 .game-time{
     border: 1px solid lightgray;
     background-color: white;
