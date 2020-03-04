@@ -1,7 +1,7 @@
 import React from 'react';
 import './Home.css'
 import GameCard from '../../components/GameCard/GameCard';
-import { API_URL, API_URL_DEV} from '../../constants';
+import { API_URL, API_URL_DEV, NHL_LOGO, MONTHS} from '../../constants';
 
 
 class Home extends React.Component {
@@ -13,7 +13,7 @@ class Home extends React.Component {
     }
   }
   componentDidMount(){
-    const url = (process.env.NODE_ENV =='development') ? API_URL_DEV : API_URL;
+    const url = (process.env.NODE_ENV === 'development') ? API_URL_DEV : API_URL;
     fetch(url)
       .then(res => res.json())
       .then(
@@ -32,8 +32,16 @@ class Home extends React.Component {
     const cards = this.state.games.map((game,num) =>
       <GameCard key={num} id={game.gamePk} status={game.status} home={game.home} away={game.away}/>
     );
+
+    var today = new Date();
+    var mm = MONTHS[today.getMonth()];
+    var dd = String(today.getDate());
+
     return(
       <div className="home">
+        <img src={NHL_LOGO} alt='NHL Logo'/>
+        <h1>NHL Games</h1>
+        <h2>{mm} {dd}</h2>
         <div className="card-list">
           {cards}
         </div>

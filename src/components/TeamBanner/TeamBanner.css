@@ -20,19 +20,23 @@
     width: 325px;
     border-bottom: 5px solid;
 }
+.banner-content h2{
+    margin: 0.5em 0em;
+}
 .banner-logo{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 .banner-logo img{
-    width: 100px; 
+    width: 80px; 
     padding: 0px 10px;   
 }
 .banner-away{
     justify-content: flex-end;
 }
 .banner-goals{
+    width: 50px;
     background-color: white;
     border-left: 1px solid lightgray;
     font-size: 18pt;

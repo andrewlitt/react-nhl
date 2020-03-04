@@ -4,7 +4,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
 }
 .chart{
     background-size: cover;
@@ -33,7 +32,7 @@
     align-items: center;
     flex-direction: column;
     padding: 5px 10px;
-    margin-bottom: 5px;
+    margin: 5px;
 }
 .legend button{
     border: none;
@@ -58,24 +57,16 @@
 .strike p{
     text-decoration: line-through;
     background-color: lightgrey;
-
 }
-.goals{
-    color: red;
+.legend-plays{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-weight: 500;
+}
+.legend-teams{
     font-weight: 700;
-}
-.shots{
-    color: blue;
-
-}
-.missed{
-    color: black;
-}
-.blocked{
-    color: purple
-}
-.hits{
-    color: green;
-    font-weight: 700;
-
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }

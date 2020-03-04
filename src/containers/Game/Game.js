@@ -31,7 +31,7 @@ class Game extends React.Component {
     }
 
     getData(){
-        const url = (process.env.NODE_ENV =='development') ? API_URL_DEV : API_URL;
+        const url = (process.env.NODE_ENV === 'development') ? API_URL_DEV : API_URL;
         fetch(`${url}/game/${this.state.id}`)
         .then(res => res.json())
         .then(
@@ -76,11 +76,8 @@ class Game extends React.Component {
                         };
                         return info;
                     });
-
-                    console.log(awayPlayerData)
-
-                    const columns = [{
-                        Header: 'Team',
+                    const awayColumns = [{
+                        Header: away.name,
                         columns: [
                             { accessor: 'jerseyNumber', Header: 'Jersey #'},
                             { accessor: 'fullName', Header: 'Full Name'},
@@ -90,23 +87,30 @@ class Game extends React.Component {
                             { accessor: 'timeOnIce', Header: 'TOI'}
                         ]
                     }];
-                    
+                    const homeColumns = [{
+                        Header:  home.name,
+                        columns: [
+                            { accessor: 'jerseyNumber', Header: 'Jersey #'},
+                            { accessor: 'fullName', Header: 'Full Name'},
+                            { accessor: 'goals', Header: 'Goals'},
+                            { accessor: 'shots', Header: 'Shots'},
+                            { accessor: 'hits', Header: 'Hits'},
+                            { accessor: 'timeOnIce', Header: 'TOI'}
+                        ]
+                    }];
                     return(
                         <div className="game-container">
                             <TeamBanner away={away} home={home}/>
-                            <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
-
                             <div className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></div>
-                            <div className='team-tables'>
-                                <PlayerTable columns={columns} data={awayPlayerData} />
-                                <PlayerTable columns={columns} data={homePlayerData} />
-                            </div>
-                            <h3 className="">Last Play</h3>  
                             <div className="last-play">
-                                {plays.currentPlay.players && <img src={PLAYER_URL+plays.currentPlay.players[0].player.id+'.jpg'}/> } 
+                                {plays.currentPlay.players && <img src={PLAYER_URL+plays.currentPlay.players[0].player.id+'.jpg'} alt = 'Player'/> } 
                                 <p>{plays.currentPlay.result.description} ({plays.currentPlay.about.periodTime} {plays.currentPlay.about.ordinalNum})</p>
                             </div>
-
+                            <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
+                            <div className='team-tables'>
+                                <PlayerTable columns={awayColumns} data={awayPlayerData} />
+                                <PlayerTable columns={homeColumns} data={homePlayerData} />
+                            </div>
                             <Link className ="link back-link" to={'/'}>
                                 <p className="back">Home</p>
                             </Link>
@@ -118,9 +122,9 @@ class Game extends React.Component {
                         <div className="not-started-container">
                             <h1>This game hasn't started yet. Come back in a bit!</h1>
                             <div className='not-started'>
-                                <img src= {`${LOGO_URL}${away.id}.svg`}/>
+                                <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${home.name} Logo`}/>
                                 <h1>at</h1>
-                                <img src= {`${LOGO_URL}${home.id}.svg`}/>
+                                <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
                             </div>
                             <Link className ="link backLink" to={'/'}>
                                 <p className="back">Home</p>

@@ -20,12 +20,10 @@ const PlayerTable = ({ columns, data }) => {
     return (
         <>
             <table className='player-table' {...getTableProps()}>
-                <thead>
+                <thead className='player-table-header'>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map(column => (
-                        // Add the sorting props to control sorting. For this example
-                        // we can add them into the header props
                         <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                         {column.render('Header')}
                         {/* Add a sort direction indicator */}
@@ -41,7 +39,7 @@ const PlayerTable = ({ columns, data }) => {
                     </tr>
                 ))}
                 </thead>
-                <tbody {...getTableBodyProps()}>
+                <tbody className='player-table-body'{...getTableBodyProps()}>
                 {rows.map(
                     (row, i) => {
                     prepareRow(row);
@@ -61,5 +59,4 @@ const PlayerTable = ({ columns, data }) => {
         </>
     );
 }
-
 export default PlayerTable;

@@ -19,7 +19,7 @@ const TeamBanner = ({ away, home }) => {
                 <div className='banner-content banner-away' style={awayStyle}>
                     <div className='banner-logo'>
                         <h2>{away.teamName}</h2>
-                        <img src= {`${LOGO_URL}${away.id}.svg`}/>
+                        <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${away.name} Logo`}/>
                     </div>
                 </div>
                 <div className='banner-goals'>
@@ -32,7 +32,7 @@ const TeamBanner = ({ away, home }) => {
                 </div>
                 <div className='banner-content' style={homeStyle}>
                     <div className='banner-logo'>
-                        <img src={`${LOGO_URL}${home.id}.svg`}/>
+                        <img src={`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
                         <h2>{home.teamName}</h2>
                     </div>
                 </div>

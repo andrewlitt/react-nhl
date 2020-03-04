@@ -4,15 +4,16 @@
     align-items: center;
     border: 1px solid lightgray;
     border-radius: 20px;
-    padding: 30px 10px 0px 10px;
-    margin: 30px;
+    padding: 20px 5px 0px 10px;
+    margin: 10px;
     text-decoration: none;
-    width: 500px;
+    width: 400px;
     background-color: white;
     transition: 0.3s;
 }
 .card h3{
     color: black;
+    margin: 0.5em 0em;
 }
 .card:hover{
     background-color: rgb(245, 245, 245);
@@ -31,14 +32,16 @@
     justify-self: flex-start;
 }
 .team img{
-    width: 100px;
+    width: 80px;
 }
 .team h1{
     padding: 0px 10px 0px 30px;
-    color: black
+    color: black;
 }
 .team h2{
     color: black;
+    font-size: 1em;
+    margin: 0.5em 0em;
 }
 .team p{
     color: grey;

@@ -3,6 +3,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
+}
+.home img{
+    width: 80px;
+    margin-top: 10px;
 }
 .card-list{
     display: flex;

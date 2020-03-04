@@ -9,22 +9,23 @@ import Wye from '../../static/img/wye.png';
 
 import './RinkChart.css'
 import {
-    ResponsiveContainer,ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend
+    ResponsiveContainer,ScatterChart, Scatter, XAxis, YAxis, Tooltip
 } from 'recharts';
 
 const RinkChart = ({ plays, away, home, homeStart }) => {
 
     const getCoords = (teamID, playType, plays) =>{
         const validPlays = plays.filter(play => {
-            if(play.team && play.coordinates.x && play.team.id == teamID && play.result.eventTypeId === playType){
+            if(play.team && play.coordinates.x && play.team.id === teamID && play.result.eventTypeId === playType){
                 return play;
-            }  
+            } 
+            return null;
         });
         const coords = validPlays.map(play => {
-            var mult = ((play.about.period == 2) ? -1 : 1);
-            if(homeStart =="left") mult = -1*mult;
+            var mult = ((play.about.period === 2) ? -1 : 1);
+            if(homeStart === "left") mult = -1*mult;
             
-            var color = ((teamID == home.id) ? home.color1 : away.color1);
+            var color = ((teamID === home.id) ? home.color1 : away.color1);
             return { name: play.result.description, playerID: play.players[0].player.id, x: mult*play.coordinates.x, y: mult*play.coordinates.y, color:color }
         });
         return coords;
@@ -35,7 +36,7 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
             console.log(payload[1])
             return (
                 <div className="tooltip" style={{backgroundColor: payload[1].payload.color, color: 'white' }}>
-                    <img src={PLAYER_URL+payload[1].payload.playerID+'.jpg'} />
+                    <img src={PLAYER_URL+payload[1].payload.playerID+'.jpg'} alt = 'Player' />
                     <p className="label">{payload[1].payload.name}</p>
                 </div>
             );
@@ -53,7 +54,7 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
     
     return (
         <div className="chart-container"> 
-            <ResponsiveContainer className="chart" width="80%" aspect={2.35}>
+            <ResponsiveContainer className="chart" width="90%" aspect={2.35}>
                 <ScatterChart>
                     <XAxis type="number" dataKey="x" domain={[-100, 100]} hide={true}/>
                     <YAxis type="number" dataKey="y" domain={[-43, 43]} hide={true} />
@@ -73,14 +74,14 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
                 </ScatterChart>
             </ResponsiveContainer>
             <div className="legend">
-                <div>
-                    <button className={ !goals   ? 'strike' : ''} onClick={ () => setGoals(!goals)     }><img src={Triangle}/><p>Goals</p></button>
-                    <button className={ !shots   ? 'strike' : ''} onClick={ () => setShots(!shots)     }><img src={Circle}/><p>Shots</p></button>
-                    <button className={ !missed  ? 'strike' : ''} onClick={ () => setMissed(!missed)   }><img src={Square}/><p>Missed Shots</p></button>
-                    <button className={ !blocked ? 'strike' : ''} onClick={ () => setBlocked(!blocked) }><img src={Diamond}/><p>Blocked Shots</p></button>
-                    <button className={ !hits    ? 'strike' : ''} onClick={ () => setHits(!hits)       }><img src={Wye}/><p>Hits</p></button>
+                <div className="legend-plays">
+                    <button className={ !goals   ? 'strike' : ''} onClick={ () => setGoals(!goals)     }><img src={Triangle} alt='Triangle'/><p>Goals</p></button>
+                    <button className={ !shots   ? 'strike' : ''} onClick={ () => setShots(!shots)     }><img src={Circle} alt='Circle'/><p>Shots</p></button>
+                    <button className={ !missed  ? 'strike' : ''} onClick={ () => setMissed(!missed)   }><img src={Square} alt='Square'/><p>Missed Shots</p></button>
+                    <button className={ !blocked ? 'strike' : ''} onClick={ () => setBlocked(!blocked) }><img src={Diamond} alt='Diamond'/><p>Blocked Shots</p></button>
+                    <button className={ !hits    ? 'strike' : ''} onClick={ () => setHits(!hits)       }><img src={Wye} alt='Wye'/><p>Hits</p></button>
                 </div>
-                <div>
+                <div className="legend-teams">
                     <button className={!showAway ? 'strike' : ''} style={{color: away.color1}} onClick={ () => setAway(!showAway) }><p>{away.teamName}</p></button>
                     <button className={!showHome ? 'strike' : ''} style={{color: home.color1}} onClick={ () => setHome(!showHome) }><p>{home.teamName}</p></button>
                 </div>
