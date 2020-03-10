@@ -3,7 +3,9 @@ import './Game.css'
 import RinkChart from '../../components/RinkChart/RinkChart';
 import PlayerTable from '../../components/PlayerTable/PlayerTable';
 import TeamBanner from '../../components/TeamBanner/TeamBanner';
-import {LOGO_URL, PLAYER_URL, API_URL, API_URL_DEV } from '../../constants';
+import LastPlay from '../../components/LastPlay/LastPlay';
+
+import {LOGO_URL, API_URL, API_URL_DEV } from '../../constants';
 import { Link } from 'react-router-dom';
 
 class Game extends React.Component {
@@ -76,10 +78,7 @@ class Game extends React.Component {
                         <div className="game-container">
                             <TeamBanner away={away} home={home}/>
                             <div className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></div>
-                            <div className="last-play">
-                                {plays.currentPlay.players && <img src={PLAYER_URL+plays.currentPlay.players[0].player.id+'.jpg'} alt = 'Player'/> } 
-                                <p>{plays.currentPlay.result.description} ({plays.currentPlay.about.periodTime} {plays.currentPlay.about.ordinalNum})</p>
-                            </div>
+                            <LastPlay play={plays.currentPlay} />
                             <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
                             <div className='team-tables'>
                                 <PlayerTable columns={awayColumns} data={away.players} />
@@ -108,7 +107,7 @@ class Game extends React.Component {
                             <div className="not-started-half" style={homeStyle}>
                                 <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
                             </div>
-                            <h1 className = "center top">This game hasn't started yet 😑</h1>
+                            <h1 className = "center top">This game hasn't started yet <span role="img" label="face">😑</span></h1>
                             <Link className ="link backLink center bottom" to={'/'}>
                                 <p className="back">Home</p>
                             </Link>

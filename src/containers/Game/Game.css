@@ -43,22 +43,7 @@
 .game-time h3{
     margin: 10px;
 }
-.last-play{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 10px;
-    border: 1px solid lightgray;
-    background-color: white;
-    margin: 5px;
-}
-.last-play img{
-    width: 80px;
-    border: 1px solid lightgray;
-    border-radius: 50px;
-    margin: 5px;
-}
+
 .not-started-container{
     display: flex;
     justify-content: center;
