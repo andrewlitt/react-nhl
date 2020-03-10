@@ -36,7 +36,7 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
             console.log(payload[1])
             return (
                 <div className="tooltip" style={{backgroundColor: payload[1].payload.color, color: 'white' }}>
-                    <img src={PLAYER_URL+payload[1].payload.playerID+'.jpg'} alt = 'Player' />
+                    <img src={PLAYER_URL+payload[1].payload.playerID+'.jpg'} alt = 'Player'/>
                     <p className="label">{payload[1].payload.name}</p>
                 </div>
             );
@@ -44,13 +44,13 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
         return null;
     };
 
-    const[showHome, setHome]   = useState(true);
-    const[showAway, setAway]   = useState(true);
-    const[goals, setGoals]     = useState(true);
-    const[shots, setShots]     = useState(true);
-    const[missed, setMissed]   = useState(true);
-    const[blocked, setBlocked] = useState(true);
-    const[hits, setHits]       = useState(true);
+    const[showHome, setHome]    = useState(true);
+    const[showAway, setAway]    = useState(true);
+    const[goals, setGoals]      = useState(true);
+    const[shots, setShots]      = useState(true);
+    const[missed, setMissed]    = useState(true);
+    const[blocked, setBlocked]  = useState(true);
+    const[hits, setHits]        = useState(true);
     
     return (
         <div className="chart-container"> 

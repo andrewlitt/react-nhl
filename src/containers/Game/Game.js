@@ -54,50 +54,24 @@ class Game extends React.Component {
 
             if(isLoaded){
                 if(linescore.currentPeriod > 0){
-                    const homePlayerData = home.players.filter(player => player.stats.skaterStats).map(player => {
-                        const info = {
-                            jerseyNumber: player.jerseyNumber,
-                            fullName: player.person.fullName,
-                            goals: player.stats.skaterStats.goals,
-                            shots: player.stats.skaterStats.shots,
-                            hits: player.stats.skaterStats.hits,
-                            timeOnIce: player.stats.skaterStats.timeOnIce
-                        };
-                        return info;
-                    });
-                    const awayPlayerData = away.players.filter(player => player.stats.skaterStats).map(player => {
-                        const info = {
-                            jerseyNumber: player.jerseyNumber,
-                            fullName: player.person.fullName,
-                            goals: player.stats.skaterStats.goals,
-                            shots: player.stats.skaterStats.shots,
-                            hits: player.stats.skaterStats.hits,
-                            timeOnIce: player.stats.skaterStats.timeOnIce
-                        };
-                        return info;
-                    });
+
+                    const columns = [
+                        { accessor: 'jerseyNumber', Header: 'Jersey #'},
+                        { accessor: 'fullName', Header: 'Full Name'},
+                        { accessor: 'goals', Header: 'Goals'},
+                        { accessor: 'shots', Header: 'Shots'},
+                        { accessor: 'hits', Header: 'Hits'},
+                        { accessor: 'timeOnIce', Header: 'TOI'}
+                    ]
                     const awayColumns = [{
                         Header: away.name,
-                        columns: [
-                            { accessor: 'jerseyNumber', Header: 'Jersey #'},
-                            { accessor: 'fullName', Header: 'Full Name'},
-                            { accessor: 'goals', Header: 'Goals'},
-                            { accessor: 'shots', Header: 'Shots'},
-                            { accessor: 'hits', Header: 'Hits'},
-                            { accessor: 'timeOnIce', Header: 'TOI'}
-                        ]
+                        columns: columns
                     }];
                     const homeColumns = [{
                         Header:  home.name,
-                        columns: [
-                            { accessor: 'jerseyNumber', Header: 'Jersey #'},
-                            { accessor: 'fullName', Header: 'Full Name'},
-                            { accessor: 'goals', Header: 'Goals'},
-                            { accessor: 'shots', Header: 'Shots'},
-                            { accessor: 'hits', Header: 'Hits'},
-                            { accessor: 'timeOnIce', Header: 'TOI'}
-                        ]
+                        columns: columns
                     }];
+
                     return(
                         <div className="game-container">
                             <TeamBanner away={away} home={home}/>
@@ -108,8 +82,8 @@ class Game extends React.Component {
                             </div>
                             <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
                             <div className='team-tables'>
-                                <PlayerTable columns={awayColumns} data={awayPlayerData} />
-                                <PlayerTable columns={homeColumns} data={homePlayerData} />
+                                <PlayerTable columns={awayColumns} data={away.players} />
+                                <PlayerTable columns={homeColumns} data={home.players} />
                             </div>
                             <Link className ="link back-link" to={'/'}>
                                 <p className="back">Home</p>
@@ -118,15 +92,24 @@ class Game extends React.Component {
                     );
                 }
                 else{
+                    const homeStyle = {
+                        backgroundColor: home.color1,
+                        borderColor: home.color2
+                    }
+                    const awayStyle = {
+                        backgroundColor: away.color1,
+                        borderColor: away.color2
+                    }
                     return(
                         <div className="not-started-container">
-                            <h1>This game hasn't started yet. Come back in a bit!</h1>
-                            <div className='not-started'>
-                                <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${home.name} Logo`}/>
-                                <h1>at</h1>
+                            <div className="not-started-half" style={awayStyle}>
+                                <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${away.name} Logo`}/>
+                            </div>
+                            <div className="not-started-half" style={homeStyle}>
                                 <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
                             </div>
-                            <Link className ="link backLink" to={'/'}>
+                            <h1 className = "center top">This game hasn't started yet 😑</h1>
+                            <Link className ="link backLink center bottom" to={'/'}>
                                 <p className="back">Home</p>
                             </Link>
                         </div>

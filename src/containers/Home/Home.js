@@ -21,7 +21,8 @@ class Home extends React.Component {
           console.log(result)
           this.setState({
             isLoaded: true,
-            games: result
+            date: result.date,
+            games: result.games
           })
         }
       )
@@ -29,13 +30,13 @@ class Home extends React.Component {
   }
   render(){
 
+    var today = new Date(this.state.date);
+    var mm = MONTHS[today.getMonth()];
+    var dd = String(today.getDate());
+    
     const cards = this.state.games.map((game,num) =>
       <GameCard key={num} id={game.gamePk} status={game.status} home={game.home} away={game.away}/>
     );
-
-    var today = new Date();
-    var mm = MONTHS[today.getMonth()];
-    var dd = String(today.getDate());
 
     return(
       <div className="home">
