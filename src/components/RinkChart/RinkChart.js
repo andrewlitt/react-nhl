@@ -5,6 +5,7 @@ import Circle from '../../static/img/circle.png';
 import Square from '../../static/img/square.png';
 import Diamond from '../../static/img/diamond.png';
 import Wye from '../../static/img/wye.png';
+import Paper from '@material-ui/core/Paper';
 
 
 import './RinkChart.css'
@@ -73,7 +74,7 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
                     <Scatter name="away-hits"    hide={!(showAway && hits)   } data={getCoords(away.id,'HIT',plays)}          fill={away.color2} stroke={away.color1} shape="wye"/>
                 </ScatterChart>
             </ResponsiveContainer>
-            <div className="legend">
+            <Paper className="legend">
                 <div className="legend-plays">
                     <button className={ !goals   ? 'strike' : ''} onClick={ () => setGoals(!goals)     }><img src={Triangle} alt='Triangle'/><p>Goals</p></button>
                     <button className={ !shots   ? 'strike' : ''} onClick={ () => setShots(!shots)     }><img src={Circle} alt='Circle'/><p>Shots</p></button>
@@ -85,7 +86,7 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
                     <button className={!showAway ? 'strike' : ''} style={{color: away.color1}} onClick={ () => setAway(!showAway) }><p>{away.teamName}</p></button>
                     <button className={!showHome ? 'strike' : ''} style={{color: home.color1}} onClick={ () => setHome(!showHome) }><p>{home.teamName}</p></button>
                 </div>
-            </div>
+            </Paper>
         </div>      
     );
 }

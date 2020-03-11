@@ -8,9 +8,8 @@
     background-color: white;
     margin: 5px;
 }
-.last-play img{
+.last-play-img{
     width: 80px;
-    border: 1px solid lightgray;
-    border-radius: 50px;
+    height: 80px;
     margin: 5px;
 }

@@ -4,7 +4,7 @@ import RinkChart from '../../components/RinkChart/RinkChart';
 import PlayerTable from '../../components/PlayerTable/PlayerTable';
 import TeamBanner from '../../components/TeamBanner/TeamBanner';
 import LastPlay from '../../components/LastPlay/LastPlay';
-
+import Paper from '@material-ui/core/Paper';
 import {LOGO_URL, API_URL, API_URL_DEV } from '../../constants';
 import { Link } from 'react-router-dom';
 
@@ -77,7 +77,7 @@ class Game extends React.Component {
                     return(
                         <div className="game-container">
                             <TeamBanner away={away} home={home}/>
-                            <div className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></div>
+                            <Paper className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></Paper>
                             <LastPlay play={plays.currentPlay} />
                             <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
                             <div className='team-tables'>

@@ -2,13 +2,15 @@ import React from 'react';
 import './GameCard.css'
 import { LOGO_URL_LIGHT } from '../../constants';
 import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
 const GameCard = ({ id, status, home, away }) => {
     const showScore = status.codedGameState  > 2  ? true : false; 
     console.log(status.codedGameState)
     return (
         <Link className ="link" to={'/game/'+ id}>
-         <div className='card'>
+         <Paper className='card'>
             <div className='team'>
                 <div className='team-description'>
                     <img src={LOGO_URL_LIGHT + away.team.id + ".svg"} alt={`${away.team.name} Logo`}/>
@@ -30,7 +32,7 @@ const GameCard = ({ id, status, home, away }) => {
                 {showScore && <h1>{home.score}</h1> }
             </div>
             <h3>{status.detailedState}</h3>
-        </div>
+        </Paper>
         </Link>
     );
 }

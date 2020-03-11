@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color:  #ededed;
+  font-family: 'Open Sans';
 }
 
 
@@ -15,3 +16,15 @@ code {
     monospace;
 }
 
+@font-face {
+  font-family: FuturaDemi;
+  src: url('./static/fonts/FuturaBQ-DemiBold.otf');
+}
+@font-face {
+  font-family: FuturaLT;
+  src: url('./static/fonts/FuturaLT.ttf');
+}
+
+h1,h2,h3,h4{
+  font-family: 'FuturaLT';
+}

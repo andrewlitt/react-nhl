@@ -2,13 +2,14 @@ import React from 'react';
 import './Home.css'
 import GameCard from '../../components/GameCard/GameCard';
 import { API_URL, API_URL_DEV, NHL_LOGO, MONTHS} from '../../constants';
-
+import Paper from '@material-ui/core/Paper';
 
 class Home extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       isLoaded: false,
+      date: '',
       games: []
     }
   }
@@ -29,25 +30,30 @@ class Home extends React.Component {
 
   }
   render(){
-
-    var today = new Date(this.state.date);
+    const {isLoaded, date, games} = this.state;
+    var today = new Date(date);
     var mm = MONTHS[today.getMonth()];
     var dd = String(today.getDate());
     
-    const cards = this.state.games.map((game,num) =>
+    const cards = games.map((game,num) =>
       <GameCard key={num} id={game.gamePk} status={game.status} home={game.home} away={game.away}/>
     );
 
-    return(
-      <div className="home">
-        <img src={NHL_LOGO} alt='NHL Logo'/>
-        <h1>NHL Games</h1>
-        <h2>{mm} {dd}</h2>
-        <div className="card-list">
-          {cards}
+    if(isLoaded){
+      return(
+        <div className="home">
+          <Paper className="intro">
+            <img src={NHL_LOGO} alt='NHL Logo'/>
+            <h1>NHL Games</h1>
+            <h2>{mm} {dd}</h2>
+          </Paper>
+          <div className="card-list">
+            {cards}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+      return(<h1>Loading...</h1>);
   }
 }
 

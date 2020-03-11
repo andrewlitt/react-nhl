@@ -17,3 +17,13 @@
     flex-wrap: wrap;
 
 }
+.intro{
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 10px;
+}
+.intro h1{
+}
