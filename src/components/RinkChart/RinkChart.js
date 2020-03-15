@@ -7,7 +7,6 @@ import Diamond from '../../static/img/diamond.png';
 import Wye from '../../static/img/wye.png';
 import Paper from '@material-ui/core/Paper';
 
-
 import './RinkChart.css'
 import {
     ResponsiveContainer,ScatterChart, Scatter, XAxis, YAxis, Tooltip

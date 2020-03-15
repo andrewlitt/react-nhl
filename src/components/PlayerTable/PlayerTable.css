@@ -1,14 +1,8 @@
 .player-table{
-    padding: 10px;
+    white-space: nowrap;
+    width: 600px;
+}
+.player-table-header{
     margin: 10px;
-    width: 420px;
-    border-spacing: 0px;
-}
-.player-table th{
-    text-align: left;
-}
-
-.player-table-body tr:nth-child(2n){
-    background-color: rgba(211, 211, 211, 0.479);
-    border-color: rgba(211, 211, 211, 0.479);
+    text-align: center;
 }

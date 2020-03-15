@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 
 const GameCard = ({ id, status, home, away }) => {
-    const showScore = status.codedGameState  > 2  ? true : false; 
+    const showScore = (status.codedGameState  > 2 && status.codedGameState  < 9) ? true : false; 
     console.log(status.codedGameState)
     return (
         <Link className ="link" to={'/game/'+ id}>

@@ -5,6 +5,7 @@ import PlayerTable from '../../components/PlayerTable/PlayerTable';
 import TeamBanner from '../../components/TeamBanner/TeamBanner';
 import LastPlay from '../../components/LastPlay/LastPlay';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import {LOGO_URL, API_URL, API_URL_DEV } from '../../constants';
 import { Link } from 'react-router-dom';
 
@@ -53,63 +54,51 @@ class Game extends React.Component {
     
     render(){
             const {isLoaded, home, away, linescore, plays} = this.state;
-
+            const homeStyle = {
+                backgroundColor: home.color1,
+                borderColor: home.color2
+            }
+            const awayStyle = {
+                backgroundColor: away.color1,
+                borderColor: away.color2
+            }
             if(isLoaded){
                 if(linescore.currentPeriod > 0){
-
-                    const columns = [
-                        { accessor: 'jerseyNumber', Header: 'Jersey #'},
-                        { accessor: 'fullName', Header: 'Full Name'},
-                        { accessor: 'goals', Header: 'Goals'},
-                        { accessor: 'shots', Header: 'Shots'},
-                        { accessor: 'hits', Header: 'Hits'},
-                        { accessor: 'timeOnIce', Header: 'TOI'}
-                    ]
-                    const awayColumns = [{
-                        Header: away.name,
-                        columns: columns
-                    }];
-                    const homeColumns = [{
-                        Header:  home.name,
-                        columns: columns
-                    }];
-
                     return(
-                        <div className="game-container">
+                        <div className='game-container'>
                             <TeamBanner away={away} home={home}/>
-                            <Paper className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></Paper>
+                            <Paper className='game-time'><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></Paper>
                             <LastPlay play={plays.currentPlay} />
                             <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
                             <div className='team-tables'>
-                                <PlayerTable columns={awayColumns} data={away.players} />
-                                <PlayerTable columns={homeColumns} data={home.players} />
+                                <PlayerTable name={away.name} data={away.players} />
+                                <PlayerTable name={home.name}  data={home.players} />
                             </div>
-                            <Link className ="link back-link" to={'/'}>
-                                <p className="back">Home</p>
+                            <Link className ='link back-link' to={'/'}>
+                                <Button variant='contained' size='large' color='secondary'>
+                                    Home
+                                </Button>
                             </Link>
                         </div>
                     );
                 }
                 else{
-                    const homeStyle = {
-                        backgroundColor: home.color1,
-                        borderColor: home.color2
-                    }
-                    const awayStyle = {
-                        backgroundColor: away.color1,
-                        borderColor: away.color2
-                    }
                     return(
-                        <div className="not-started-container">
-                            <div className="not-started-half" style={awayStyle}>
-                                <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${away.name} Logo`}/>
+                        <div className='not-started-container'>
+                            <h1>This game hasn't started yet <span role='img' label='face'>😑</span></h1>
+                            <div className='not-started-teams'>
+                                <Paper className='not-started-half' style={awayStyle}>
+                                    <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${away.name} Logo`}/>
+                                </Paper>
+                                <h1> at </h1>
+                                <Paper className='not-started-half' style={homeStyle}>
+                                    <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
+                                </Paper>
                             </div>
-                            <div className="not-started-half" style={homeStyle}>
-                                <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
-                            </div>
-                            <h1 className = "center top">This game hasn't started yet <span role="img" label="face">😑</span></h1>
-                            <Link className ="link backLink center bottom" to={'/'}>
-                                <p className="back">Home</p>
+                            <Link className ='link back-link' to={'/'}>
+                                <Button variant='contained' size='large' color='secondary'>
+                                    Home
+                                </Button>
                             </Link>
                         </div>
                     )

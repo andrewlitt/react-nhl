@@ -1,66 +1,50 @@
 import React from 'react';
-import './PlayerTable.css'
-import { useTable, useSortBy } from 'react-table'
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import './PlayerTable.css'
 
-const PlayerTable = ({ columns, data }) => {
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-      } = useTable(
-        {
-          columns,
-          data,
-        },
-        useSortBy
-      )
 
-    return (
-        <>
-            <Paper className='player-table'>
-                <table  {...getTableProps()}>
-                        <thead className='player-table-header'>
-                        {headerGroups.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                                {column.render('Header')}
-                                {/* Add a sort direction indicator */}
-                                <span>
-                                    {column.isSorted
-                                    ? column.isSortedDesc
-                                        ? ' 🔽'
-                                        : ' 🔼'
-                                    : ''}
-                                </span>
-                                </th>
-                            ))}
-                            </tr>
-                        ))}
-                        </thead>
-                        <tbody className='player-table-body'{...getTableBodyProps()}>
-                        {rows.map(
-                            (row, i) => {
-                            prepareRow(row);
-                            return (
-                                <tr {...row.getRowProps()}>
-                                {row.cells.map(cell => {
-                                    return (
-                                    <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                    )
-                                })}
-                                </tr>
-                            )}
-                        )}
-                        </tbody>
-                    </table>
-                <br />
-            </Paper>
-                
-        </>
-    );
+
+
+const PlayerTable = ({ name, data }) => {
+
+  return (
+    <Paper className='player-table'>
+        <h4 className='player-table-header'>{name}</h4>
+        <Table size="small" aria-label="simple table">
+            <TableHead >
+                <TableRow>
+                    <TableCell >Jersey&nbsp;#</TableCell>
+                    <TableCell align="right">Full&nbsp;Name</TableCell>
+                    <TableCell align="right">Goals</TableCell>
+                    <TableCell align="right">Shots</TableCell>
+                    <TableCell align="right">Hits</TableCell>
+                    <TableCell align="right">TOI</TableCell>
+                </TableRow>
+            </TableHead>
+        <TableBody>
+        {data.map(player => (
+            <TableRow key={player.fullName}>
+                    <TableCell component="th" scope="row">
+                    {player.jerseyNumber}
+                    </TableCell>
+                    <TableCell align="right">{player.fullName}</TableCell>
+                    <TableCell align="right">{player.goals}</TableCell>
+                    <TableCell align="right">{player.shots}</TableCell>
+                    <TableCell align="right">{player.hits}</TableCell>
+                    <TableCell align="right">{player.timeOnIce}</TableCell>
+            </TableRow>
+        ))}
+        </TableBody>
+        </Table>
+    </Paper>
+  );
 }
+
 export default PlayerTable;

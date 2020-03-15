@@ -2,7 +2,9 @@ import React from 'react';
 import './Home.css'
 import GameCard from '../../components/GameCard/GameCard';
 import { API_URL, API_URL_DEV, NHL_LOGO, MONTHS} from '../../constants';
+import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 class Home extends React.Component {
   constructor(props){
@@ -46,6 +48,29 @@ class Home extends React.Component {
             <img src={NHL_LOGO} alt='NHL Logo'/>
             <h1>NHL Games</h1>
             <h2>{mm} {dd}</h2>
+          </Paper>
+          <Paper className='PSA'>
+            <p>
+              Well... it seems the NHL is going to be on hold for a little while.<br/>
+              In the meantime, you can check out some examples of this app below.
+            </p>
+            <div className='PSA-buttons'>
+              <Link className ='link back-link' to={'/game/2019020901'}>
+                  <Button size='large' color='primary'>
+                    Example 1
+                  </Button>
+              </Link>
+              <Link className ='link back-link' to={'/game/2019020100'}>
+                  <Button size='large' color='primary'>
+                    Example 2
+                  </Button>
+              </Link>
+              <Link className ='link back-link' to={'/game/2019020150'}>
+                  <Button size='large' color='primary'>
+                    Example 3
+                  </Button>
+              </Link>
+            </div>
           </Paper>
           <div className="card-list">
             {cards}

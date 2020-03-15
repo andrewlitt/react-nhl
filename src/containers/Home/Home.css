@@ -27,3 +27,13 @@
 }
 .intro h1{
 }
+
+.PSA{
+    padding: 20px;
+    text-align: center;
+}
+.PSA-buttons{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
