@@ -85,7 +85,7 @@ class Game extends React.Component {
                 else{
                     return(
                         <div className='not-started-container'>
-                            <h1>This game hasn't started yet <span role='img' label='face'>😑</span></h1>
+                            <h1>This game hasn't started yet <span role='img' aria-label='face'>😑</span></h1>
                             <div className='not-started-teams'>
                                 <Paper className='not-started-half' style={awayStyle}>
                                     <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${away.name} Logo`}/>
@@ -104,7 +104,11 @@ class Game extends React.Component {
                     )
                 }
             }
-            return(<h1>Loading...</h1>);
+            return(
+            <div className = 'loading'>
+                <h1>Loading...</h1>
+            </div>
+            );
         }
     }
 

@@ -37,3 +37,26 @@
     justify-content: space-evenly;
     align-items: center;
 }
+
+.loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.loading h1{
+    animation-duration: 1s;
+    animation-name: grow;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes grow {
+    from {
+      font-size: 2em;
+    }
+  
+    to {
+      font-size: 2.5em;
+    }
+  }

@@ -29,13 +29,12 @@ class Home extends React.Component {
           })
         }
       )
-
   }
   render(){
     const {isLoaded, date, games} = this.state;
     var today = new Date(date);
     var mm = MONTHS[today.getMonth()];
-    var dd = String(today.getDate());
+    var dd = String(today.getDate()+1);
     
     const cards = games.map((game,num) =>
       <GameCard key={num} id={game.gamePk} status={game.status} home={game.home} away={game.away}/>
@@ -46,7 +45,7 @@ class Home extends React.Component {
         <div className="home">
           <Paper className="intro">
             <img src={NHL_LOGO} alt='NHL Logo'/>
-            <h1>NHL Games</h1>
+            <h1>Today's Games</h1>
             <h2>{mm} {dd}</h2>
           </Paper>
           <Paper className='PSA'>
@@ -78,7 +77,11 @@ class Home extends React.Component {
         </div>
       )
     }
-      return(<h1>Loading...</h1>);
+      return(
+      <div className = 'loading'>
+        <h1>Loading...</h1>
+      </div>
+      );
   }
 }
 
