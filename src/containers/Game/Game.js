@@ -1,13 +1,13 @@
-import React from 'react';
-import './Game.css'
-import RinkChart from '../../components/RinkChart/RinkChart';
-import PlayerTable from '../../components/PlayerTable/PlayerTable';
-import TeamBanner from '../../components/TeamBanner/TeamBanner';
-import LastPlay from '../../components/LastPlay/LastPlay';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import {LOGO_URL, API_URL, API_URL_DEV } from '../../constants';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "./Game.css"
+import RinkChart from "../../components/RinkChart/RinkChart";
+import PlayerTable from "../../components/PlayerTable/PlayerTable";
+import TeamBanner from "../../components/TeamBanner/TeamBanner";
+import LastPlay from "../../components/LastPlay/LastPlay";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import {LOGO_URL, API_URL, API_URL_DEV } from "../../constants";
+import { Link } from "react-router-dom";
 
 class Game extends React.Component {
     
@@ -34,7 +34,7 @@ class Game extends React.Component {
     }
 
     getData(){
-        const url = (process.env.NODE_ENV === 'development') ? API_URL_DEV : API_URL;
+        const url = (process.env.NODE_ENV === "development") ? API_URL_DEV : API_URL;
         fetch(`${url}/game/${this.state.id}`)
         .then(res => res.json())
         .then(
@@ -65,17 +65,17 @@ class Game extends React.Component {
             if(isLoaded){
                 if(linescore.currentPeriod > 0){
                     return(
-                        <div className='game-container'>
+                        <div className="game-container">
                             <TeamBanner away={away} home={home}/>
-                            <Paper className='game-time'><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></Paper>
+                            <Paper className="game-time"><h3>{linescore.currentPeriodOrdinal} - {linescore.currentPeriodTimeRemaining}</h3></Paper>
                             <LastPlay play={plays.currentPlay} />
                             <RinkChart plays={plays.allPlays} away={away} home={home} homeStart = {linescore.periods[0].home.rinkSide}/>
-                            <div className='team-tables'>
+                            <div className="team-tables">
                                 <PlayerTable name={away.name} data={away.players} />
                                 <PlayerTable name={home.name}  data={home.players} />
                             </div>
-                            <Link className ='link back-link' to={'/'}>
-                                <Button variant='contained' size='large' color='secondary'>
+                            <Link className ="link back-link" to={"/"}>
+                                <Button variant="contained" size="large" color="secondary">
                                     Home
                                 </Button>
                             </Link>
@@ -84,19 +84,19 @@ class Game extends React.Component {
                 }
                 else{
                     return(
-                        <div className='not-started-container'>
-                            <h1>This game hasn't started yet <span role='img' aria-label='face'>😑</span></h1>
-                            <div className='not-started-teams'>
-                                <Paper className='not-started-half' style={awayStyle}>
+                        <div className="not-started-container">
+                            <h1>This game hasn't started yet <span role="img" aria-label="face">😑</span></h1>
+                            <div className="not-started-teams">
+                                <Paper className="not-started-half" style={awayStyle}>
                                     <img src= {`${LOGO_URL}${away.id}.svg`} alt={`${away.name} Logo`}/>
                                 </Paper>
                                 <h1> at </h1>
-                                <Paper className='not-started-half' style={homeStyle}>
+                                <Paper className="not-started-half" style={homeStyle}>
                                     <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
                                 </Paper>
                             </div>
-                            <Link className ='link back-link' to={'/'}>
-                                <Button variant='contained' size='large' color='secondary'>
+                            <Link className ="link back-link" to={"/"}>
+                                <Button variant="contained" size="large" color="secondary">
                                     Home
                                 </Button>
                             </Link>
@@ -105,7 +105,7 @@ class Game extends React.Component {
                 }
             }
             return(
-            <div className = 'loading'>
+            <div className = "loading">
                 <h1>Loading...</h1>
             </div>
             );

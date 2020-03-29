@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { PLAYER_URL } from '../../constants';
-import Triangle from '../../static/img/triangle.png';
-import Circle from '../../static/img/circle.png';
-import Square from '../../static/img/square.png';
-import Diamond from '../../static/img/diamond.png';
-import Wye from '../../static/img/wye.png';
-import Paper from '@material-ui/core/Paper';
+import React, { useState } from "react";
+import { PLAYER_URL } from "../../constants";
+import Triangle from "../../static/img/triangle.png";
+import Circle from "../../static/img/circle.png";
+import Square from "../../static/img/square.png";
+import Diamond from "../../static/img/diamond.png";
+import Wye from "../../static/img/wye.png";
+import Paper from "@material-ui/core/Paper";
 
-import './RinkChart.css'
+import "./RinkChart.css"
 import {
     ResponsiveContainer,ScatterChart, Scatter, XAxis, YAxis, Tooltip
-} from 'recharts';
+} from "recharts";
 
 const RinkChart = ({ plays, away, home, homeStart }) => {
 
@@ -35,8 +35,8 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
         if (active) {
             console.log(payload[1])
             return (
-                <div className="tooltip" style={{backgroundColor: payload[1].payload.color, color: 'white' }}>
-                    <img src={PLAYER_URL+payload[1].payload.playerID+'.jpg'} alt = 'Player'/>
+                <div className="tooltip" style={{backgroundColor: payload[1].payload.color, color: "white" }}>
+                    <img src={PLAYER_URL+payload[1].payload.playerID+".jpg"} alt = "Player"/>
                     <p className="label">{payload[1].payload.name}</p>
                 </div>
             );
@@ -58,32 +58,32 @@ const RinkChart = ({ plays, away, home, homeStart }) => {
                 <ScatterChart>
                     <XAxis type="number" dataKey="x" domain={[-100, 100]} hide={true}/>
                     <YAxis type="number" dataKey="y" domain={[-43, 43]} hide={true} />
-                    <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<PlayTooltip />}/>
+                    <Tooltip cursor={{ strokeDasharray: "3 3" }} content={<PlayTooltip />}/>
 
-                    <Scatter name="home-goals"   hide={!(showHome && goals)  } data={getCoords(home.id,'GOAL',plays)}         fill={home.color1} stroke={home.color2} shape="triangle"/>
-                    <Scatter name="home-shots"   hide={!(showHome && shots)  } data={getCoords(home.id,'SHOT',plays)}         fill={home.color1} stroke={home.color2} shape="circle"/>
-                    <Scatter name="home-missed"  hide={!(showHome && missed) } data={getCoords(home.id,'MISSED_SHOT',plays)}  fill={home.color1} stroke={home.color2} shape="square"/>
-                    <Scatter name="home-blocked" hide={!(showHome && blocked)} data={getCoords(home.id,'BLOCKED_SHOT',plays)} fill={home.color1} stroke={home.color2} shape="diamond"/>
-                    <Scatter name="home-hits"    hide={!(showHome && hits)   } data={getCoords(home.id,'HIT',plays)}          fill={home.color1} stroke={home.color2} shape="wye"/>
+                    <Scatter name="home-goals"   hide={!(showHome && goals)  } data={getCoords(home.id,"GOAL",plays)}         fill={home.color1} stroke={home.color2} shape="triangle"/>
+                    <Scatter name="home-shots"   hide={!(showHome && shots)  } data={getCoords(home.id,"SHOT",plays)}         fill={home.color1} stroke={home.color2} shape="circle"/>
+                    <Scatter name="home-missed"  hide={!(showHome && missed) } data={getCoords(home.id,"MISSED_SHOT",plays)}  fill={home.color1} stroke={home.color2} shape="square"/>
+                    <Scatter name="home-blocked" hide={!(showHome && blocked)} data={getCoords(home.id,"BLOCKED_SHOT",plays)} fill={home.color1} stroke={home.color2} shape="diamond"/>
+                    <Scatter name="home-hits"    hide={!(showHome && hits)   } data={getCoords(home.id,"HIT",plays)}          fill={home.color1} stroke={home.color2} shape="wye"/>
 
-                    <Scatter name="away-goals"   hide={!(showAway && goals)  } data={getCoords(away.id,'GOAL',plays)}         fill={away.color2} stroke={away.color1} shape="triangle"/>
-                    <Scatter name="away-shots"   hide={!(showAway && shots)  } data={getCoords(away.id,'SHOT',plays)}         fill={away.color2} stroke={away.color1} shape="circle"/>
-                    <Scatter name="away-missed"  hide={!(showAway && missed) } data={getCoords(away.id,'MISSED_SHOT', plays)} fill={away.color2} stroke={away.color1} shape="square"/>
-                    <Scatter name="away-blocked" hide={!(showAway && blocked)} data={getCoords(away.id,'BLOCKED_SHOT',plays)} fill={away.color2} stroke={away.color1} shape="diamond"/>
-                    <Scatter name="away-hits"    hide={!(showAway && hits)   } data={getCoords(away.id,'HIT',plays)}          fill={away.color2} stroke={away.color1} shape="wye"/>
+                    <Scatter name="away-goals"   hide={!(showAway && goals)  } data={getCoords(away.id,"GOAL",plays)}         fill={away.color2} stroke={away.color1} shape="triangle"/>
+                    <Scatter name="away-shots"   hide={!(showAway && shots)  } data={getCoords(away.id,"SHOT",plays)}         fill={away.color2} stroke={away.color1} shape="circle"/>
+                    <Scatter name="away-missed"  hide={!(showAway && missed) } data={getCoords(away.id,"MISSED_SHOT", plays)} fill={away.color2} stroke={away.color1} shape="square"/>
+                    <Scatter name="away-blocked" hide={!(showAway && blocked)} data={getCoords(away.id,"BLOCKED_SHOT",plays)} fill={away.color2} stroke={away.color1} shape="diamond"/>
+                    <Scatter name="away-hits"    hide={!(showAway && hits)   } data={getCoords(away.id,"HIT",plays)}          fill={away.color2} stroke={away.color1} shape="wye"/>
                 </ScatterChart>
             </ResponsiveContainer>
             <Paper className="legend">
                 <div className="legend-plays">
-                    <button className={ !goals   ? 'strike' : ''} onClick={ () => setGoals(!goals)     }><img src={Triangle} alt='Triangle'/><p>Goals</p></button>
-                    <button className={ !shots   ? 'strike' : ''} onClick={ () => setShots(!shots)     }><img src={Circle} alt='Circle'/><p>Shots</p></button>
-                    <button className={ !missed  ? 'strike' : ''} onClick={ () => setMissed(!missed)   }><img src={Square} alt='Square'/><p>Missed Shots</p></button>
-                    <button className={ !blocked ? 'strike' : ''} onClick={ () => setBlocked(!blocked) }><img src={Diamond} alt='Diamond'/><p>Blocked Shots</p></button>
-                    <button className={ !hits    ? 'strike' : ''} onClick={ () => setHits(!hits)       }><img src={Wye} alt='Wye'/><p>Hits</p></button>
+                    <button className={ !goals   ? "strike" : ""} onClick={ () => setGoals(!goals)     }><img src={Triangle} alt="Triangle"/><p>Goals</p></button>
+                    <button className={ !shots   ? "strike" : ""} onClick={ () => setShots(!shots)     }><img src={Circle} alt="Circle"/><p>Shots</p></button>
+                    <button className={ !missed  ? "strike" : ""} onClick={ () => setMissed(!missed)   }><img src={Square} alt="Square"/><p>Missed Shots</p></button>
+                    <button className={ !blocked ? "strike" : ""} onClick={ () => setBlocked(!blocked) }><img src={Diamond} alt="Diamond"/><p>Blocked Shots</p></button>
+                    <button className={ !hits    ? "strike" : ""} onClick={ () => setHits(!hits)       }><img src={Wye} alt="Wye"/><p>Hits</p></button>
                 </div>
                 <div className="legend-teams">
-                    <button className={!showAway ? 'strike' : ''} style={{color: away.color1}} onClick={ () => setAway(!showAway) }><p>{away.teamName}</p></button>
-                    <button className={!showHome ? 'strike' : ''} style={{color: home.color1}} onClick={ () => setHome(!showHome) }><p>{home.teamName}</p></button>
+                    <button className={!showAway ? "strike" : ""} style={{color: away.color1}} onClick={ () => setAway(!showAway) }><p>{away.teamName}</p></button>
+                    <button className={!showHome ? "strike" : ""} style={{color: home.color1}} onClick={ () => setHome(!showHome) }><p>{home.teamName}</p></button>
                 </div>
             </Paper>
         </div>      
