@@ -107,7 +107,7 @@ class Game extends React.Component {
                             <div className="not-started-half" style={homeStyle}>
                                 <img src= {`${LOGO_URL}${home.id}.svg`} alt={`${home.name} Logo`}/>
                             </div>
-                            <h1 className = "center top">This game hasn't started yet <span role="img" label="face">😑</span></h1>
+                            <h1 className = "center top">This game hasn't started yet <span role="img" aria-label="face">😑</span></h1>
                             <Link className ="link backLink center bottom" to={'/'}>
                                 <p className="back">Home</p>
                             </Link>
