@@ -115,7 +115,7 @@ class Game extends React.Component {
                     )
                 }
             }
-            return(<h1>Loading...</h1>);
+            return(<center><h1>Loading...</h1></center>);
         }
     }
 

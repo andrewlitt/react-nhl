@@ -1,7 +1,7 @@
 // Static asset URLS
 export const LOGO_URL = 'https://www-league.nhlstatic.com/images/logos/teams-current-primary-dark/'; //TEAMID.svg
 export const LOGO_URL_LIGHT = 'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/'; //TEAMID.svg
-export const PLAYER_URL = 'https://nhl.bamcontent.com/images/headshots/current/168x168/'; //PLAYERID.jpg
+export const PLAYER_URL = 'https://cms.nhl.bamgrid.com/images/headshots/current/168x168/'; //PLAYERID.jpg
 export const NHL_LOGO = 'https://www-league.nhlstatic.com/images/logos/league-dark/133-flat.svg';
 
 export const API_URL = 'https://react-nhl-server.now.sh'; 
