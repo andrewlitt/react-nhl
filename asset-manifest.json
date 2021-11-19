@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/react-nhl/static/css/main.f012e26f.chunk.css",
+    "main.js": "/react-nhl/static/js/main.2dc3e1a1.chunk.js",
+    "main.js.map": "/react-nhl/static/js/main.2dc3e1a1.chunk.js.map",
+    "runtime-main.js": "/react-nhl/static/js/runtime-main.3b43b3ae.js",
+    "runtime-main.js.map": "/react-nhl/static/js/runtime-main.3b43b3ae.js.map",
+    "static/css/2.eb45ad44.chunk.css": "/react-nhl/static/css/2.eb45ad44.chunk.css",
+    "static/js/2.971f840d.chunk.js": "/react-nhl/static/js/2.971f840d.chunk.js",
+    "static/js/2.971f840d.chunk.js.map": "/react-nhl/static/js/2.971f840d.chunk.js.map",
+    "index.html": "/react-nhl/index.html",
+    "precache-manifest.5073c29d0821b46d1211fa538b5b47a7.js": "/react-nhl/precache-manifest.5073c29d0821b46d1211fa538b5b47a7.js",
+    "service-worker.js": "/react-nhl/service-worker.js",
+    "static/css/2.eb45ad44.chunk.css.map": "/react-nhl/static/css/2.eb45ad44.chunk.css.map",
+    "static/css/main.f012e26f.chunk.css.map": "/react-nhl/static/css/main.f012e26f.chunk.css.map",
+    "static/js/2.971f840d.chunk.js.LICENSE": "/react-nhl/static/js/2.971f840d.chunk.js.LICENSE",
+    "static/media/index.css": "/react-nhl/static/media/FuturaLT.11f68b85.ttf",
+    "static/media/circle.png": "/react-nhl/static/media/circle.e6920dd7.png",
+    "static/media/diamond.png": "/react-nhl/static/media/diamond.9090a187.png",
+    "static/media/RinkChart.css": "/react-nhl/static/media/rinkBW.a268fdd7.png",
+    "static/media/square.png": "/react-nhl/static/media/square.007cf8d2.png",
+    "static/media/triangle.png": "/react-nhl/static/media/triangle.7ad38c59.png",
+    "static/media/wye.png": "/react-nhl/static/media/wye.afd12ac2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3b43b3ae.js",
+    "static/css/2.eb45ad44.chunk.css",
+    "static/js/2.971f840d.chunk.js",
+    "static/css/main.f012e26f.chunk.css",
+    "static/js/main.2dc3e1a1.chunk.js"
+  ]
+}
